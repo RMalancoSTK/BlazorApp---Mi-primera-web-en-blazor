@@ -1,4 +1,5 @@
 ﻿@page "/counter"
+@page "/counter/{startCount:int}"
 
 <PageTitle>Counter</PageTitle>
 
@@ -10,9 +11,20 @@
 
 @code {
     private int currentCount = 0;
+    [Parameter]
+    public int StartCount { get; set; } = 0;
 
+    [Parameter]
+    public int Increment { get; set; } = 1;
+    protected override void OnParametersSet()
+    {
+        currentCount = StartCount;
+        base.OnParametersSet();
+    }
     private void IncrementCount()
     {
-        currentCount++;
+        currentCount+=Increment;
     }
 }
+
+
